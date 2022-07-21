@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="section-container">
+        <section class="section">
+            <div class="section-title">
+                <h1 class="title profile-heading">
+                    Profile
+                </h1>
+            </div>
+            <div class="button-container">
+                <button id="editBtn">Edit Profile</button>
+            </div>
+            <div id="client-error" hidden>
+
+            </div>
+            <form id="edit-profile-form" action="/profile" method="POST">
+                <div class="section-container profile-container">
+                    <div class="text-container account-info">
+                        <h2 class="account-heading">
+                            Account Information
+                        </h2>
+                        <div class="profile-form-item">
+                            <input id="email" name="email" type="email" readonly='readonly' value="{{email}}"
+                                required />
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="profile-form-item">
+                            <input class="editable" id="firstName" name="firstName" type="text" readonly='readonly'
+                                value="{{firstName}}" required />
+                            <label for="firstName">First Name</label>
+                        </div>
+                        <div class="profile-form-item">
+                            <input class="editable" id="lastName" name="lastName" type="text" readonly='readonly'
+                                value="{{lastName}}" required />
+                            <label for="lastName">Last Name</label>
+                        </div>
+                        <div class="profile-form-item">
+                            <input class="editable" id="phone" name="phone" type="tel" readonly='readonly'
+                                value="{{phone}}" required />
+                            <label for="phone">Phone Number</label>
+                        </div>
+                    </div>
+                    
+                    <div class="text-container personal-info">
+                        <h2 class="personal-heading">
+                            Personal Information
+                        </h2>
+                        <div class="profile-form-item">
+                            <input class="editable" id="venmo" name="venmo" type="text" readonly='readonly'
+                                value="{{venmo}}" required />
+                            <label for="venmo">Venmo</label>
+                        </div>
+                        <div class="profile-form-item">
+                            <input class="editable" id="street" name="street" type="text" readonly='readonly'
+                                value="{{street}}" required />
+                            <label for="street">Street Address</label>
+                        </div>
+                        <div class="address-form-container">
+                            <div class="city-input-container">
+                                <input class="editable address-input city-input" id="city" name="city" type="text"
+                                    readonly='readonly' value="{{city}}" required />
+                                <label class="address-label city-label" for="city">City</label>
+                            </div>
+                            <div class="zip-input-container">
+                                <input class="editable address-input zip-input" id="zipcode" name="zipcode"
+                                    type="number" readonly='readonly' value="{{zipcode}}" required />
+                                <label class="address-label zip-label" for="zipcode">Zip</label>
+                            </div>
+                            <div class="state-input-container">
+                                <select class="address-input state-select" id="state" name="state" aria-label="state"
+                                    data-value="{{State}}"
+                                    
+                                    onfocus="this.setAttribute('data-value', this.value);"
+                                    onchange="this.value = this.getAttribute('data-value');" required>
+                                    <option class="state-option" label="State"></option>
+                                    {{#each states}}
+                                        <option class="state-option" value={{this}} {{#ifEq this ../state }}selected="selected"{{/ifEq}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <input class="editable driver-checkbox" disabled="disabled" {{#if isDriver}}checked="checked"{{else}}{{/if}}
+                                type="checkbox" value="" id="isDriver" name="isDriver" />
+                            <label class="driver-label" for="isDriver">Are you a driver?</label>
+                        </div>
+                    </div>
+                    <div class="bottom-button-container">
+                        <button class="profile-button" id="cancelBtn" disabled="disabled">Cancel</button>
+                        <button class="profile-button" type="submit" id="saveChangesBtn" disabled="disabled">Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </section>
+    </div>
+    {{> footer}}
+</div>
+
+<script type="text/javascript" src="/public/js/validateProfile.js"></script>

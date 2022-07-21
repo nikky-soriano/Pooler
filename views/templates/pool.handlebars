@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="section-container">
+        <section class="section">
+            <div class="section-title">
+                <h1 class="title event-page-heading">
+                    {{_eventName}}
+                </h1>
+            </div>
+            <div class="section-container">
+                <div class="section-container">
+                    <div class="text-container carpool-info">
+                        <input type="hidden" id="poolId" value="{{_poolId}}"/>
+                        <input type="hidden" id="eventId" value="{{_eventID}}"/>
+                        <input type="hidden" id="userEmail" value="{{email}}"/>
+                        <input type="hidden" id="currentDeparture" value="{{_departureTime}}"/>
+                        <input type="hidden" id="currentCapacity" value="{{_capacity}}"/>
+                        <h2 class="carpool-details-heading ">
+                            Carpool Details
+                        </h2>
+                        <dl class="carpool-details">
+                            <dt id="driver-label" class="event-detail-label dt-inline">Driver</dt>
+                            <dd class="event-detail-info dd-inline">{{_driverName}}</dd>
+
+                            <dt id="departure-label" class="event-detail-label">Departure Time</dt>
+                            <dd class="event-detail-info">{{_departureTime}}</dd>
+
+                            <dt id="capacity-label" class="event-detail-label dt-inline">Capacity</dt>
+                            <dd class="event-detail-info dd-inline">
+                                <span id="occupied">{{_numMembers}}</span>/{{_capacity}}
+                            </dd>
+                            <dt class="event-detail-label">Members</dt>
+                            <dd class="event-detail-info">
+                                {{#each _memberData}}
+                                <div class="member-container">
+                                    <span class="name">{{firstName}} {{lastName}}</span>
+                                    <span class="phone-num">{{phone}}</span>
+                                </div>
+                                {{/each}}
+                            </dd>
+                        </dl>
+                        {{#if _isUserInPool}}
+                        <button id="leave-btn" class="carpool-btn">Leave</button>
+                        {{else}}
+                        <button id="join-btn" class="carpool-btn">Join</button>
+                        {{/if}}
+                    </div>
+                    <div class="text-container comment-section">
+                        {{#if _isUserInPool}}
+                        <h2 class="comment-heading">Comments</h2>
+
+                        <div id="comment-error" class='modal-error' hidden>
+
+                        </div>
+                        <form id="create-comment-form" method="POST">
+                            <label for="createCommentDescription">Comment</label>
+                            <textarea id="createCommentDescription" name="createCommentDescription" required></textarea>
+                            <button class="comment-button" type="submit">Post</button>
+                        </form>
+                        <div class="comments-list" id="comments-list">
+
+                        </div>
+
+                        {{/if}}
+                    </div>
+                </div>
+                <div id="update-modal" class="modal-box">
+                    <div class="modal-content">
+                        <h1 class="modal-title">Update Carpool Details</h1>
+                        <form id="edit-pool-form" method="POST" autocomplete="off">
+                            <div id="edit-pool-error" class="modal-error" hidden>
+
+                            </div>
+                            <div id="edit-input-container" class="profile-form-item">
+
+                            </div>
+                            <div id="host-footer" class="modal-footer">
+                                <button id="edit-pool-submit" class="submit-btn" type="submit"
+                                    value="submit">Update</button>
+                            </div>
+                            <span id="edit-close-btn" class="modal-close">&times;</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src='/public/js/pool.js'></script>
